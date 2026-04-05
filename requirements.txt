@@ -1,0 +1,2 @@
+nicegui==3.9.0
+sqlalchemy==2.0.44
