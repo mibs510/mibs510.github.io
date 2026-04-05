@@ -1,3 +1,5 @@
+from urllib.parse import quote
+
 from nicegui import app, ui
 
 from models import featured_books, get_user_by_username, initialize_database
@@ -5,7 +7,31 @@ from ui_components import GLOBAL_CSS, create_book_card, create_footer, create_he
 
 
 def add_global_styles() -> None:
+    ui.colors(
+        primary='#102029',
+        secondary='#1d5c63',
+        accent='#f0b94a',
+        dark='#102029',
+        dark_page='#070d10',
+        positive='#2d7a55',
+        negative='#b84444',
+        info='#3f7ca8',
+        warning='#f0b94a',
+    )
     ui.add_head_html(f'<style>{GLOBAL_CSS}</style>')
+
+
+def build_favicon_data_uri() -> str:
+    svg = f"""
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect width="64" height="64" rx="16" fill="#102029"/>
+      <g transform="translate(8 8) scale(2)">
+        <path d="M0 0h24v24H0z" fill="none"/>
+        <path fill="#f6f1e7" d="M12 11.55C9.64 9.35 6.48 8 3 8v11c3.48 0 6.64 1.35 9 3.55 2.36-2.19 5.52-3.55 9-3.55V8c-3.48 0-6.64 1.35-9 3.55zM12 8c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"/>
+      </g>
+    </svg>
+    """.strip()
+    return f'data:image/svg+xml;utf8,{quote(svg)}'
 
 
 def user_is_logged_in() -> bool:
@@ -32,14 +58,14 @@ def login_page() -> None:
     create_header()
     create_footer()
 
-    with ui.column().classes('app-shell items-center q-py-xl'):
-        with ui.card().classes('surface-card q-pa-xl').style('width: min(460px, 100%);'):
+    with ui.column().classes('app-shell login-page-shell'):
+        with ui.card().classes('login-card'):
             ui.label('Prototype Login').classes('text-h4 text-weight-bold brand-heading')
             ui.label(
                 'This is a temporary sign-in flow so we can demonstrate the authenticated layout and floating menu.'
-            ).classes('text-body1 text-grey-7 q-mb-md')
-            username = ui.input('Username', value='student').props('outlined')
-            ui.input('Password', value='demo').props('outlined type=password')
+            ).classes('login-subtitle')
+            username = ui.input('Username', value='student').props('outlined').classes('login-input')
+            ui.input('Password', value='demo').props('outlined type=password').classes('login-input')
 
             def sign_in() -> None:
                 account = get_user_by_username(username.value.strip() or 'student')
@@ -52,10 +78,10 @@ def login_page() -> None:
                 ui.notify(f'Signed in as {account.username}', color='positive')
                 ui.navigate.to('/app')
 
-            ui.button('Enter library app', on_click=sign_in).props('unelevated no-caps').classes('full-width q-mt-md primary-button')
-            ui.label('Demo accounts seeded through the ORM: student and admin. Password validation is not implemented yet.').classes(
-                'text-caption text-grey-7 q-mt-md'
-            )
+            ui.button('Enter library app', on_click=sign_in).props('unelevated no-caps').classes('login-button')
+            ui.label(
+                'Demo accounts available: student and admin. Password validation is not implemented yet.'
+            ).classes('login-caption')
 
 
 @ui.page('/app')
@@ -124,6 +150,7 @@ if __name__ in {'__main__', '__mp_main__'}:
     initialize_database()
     ui.run(
         title='ShelfWise Library',
+        favicon=build_favicon_data_uri(),
         storage_secret='library-homework-secret',
         reload=True,
     )

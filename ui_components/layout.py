@@ -4,27 +4,32 @@ from nicegui import ui
 
 from models import Book, featured_books
 
-
 def create_header() -> None:
     with ui.header().classes('brand-header text-white q-py-md'):
         with ui.row().classes('app-shell floating-shell items-center justify-between no-wrap'):
-            with ui.row().classes('items-center q-gutter-sm'):
-                ui.icon('local_library', size='md')
-                ui.label('ShelfWise').classes('text-h5 text-weight-bold brand-heading')
+            with ui.link(target='/').classes('brand-link'):
+                with ui.row().classes('items-center q-gutter-sm no-wrap'):
+                    ui.icon('local_library', size='md')
+                    ui.label('ShelfWise').classes('text-h5 text-weight-bold brand-heading')
             with ui.row().classes('nav-links'):
                 ui.link('Browse', '/').classes('nav-link')
                 ui.link('Collections', '/').classes('nav-link')
                 ui.link('About', '/').classes('nav-link')
-            with ui.row().classes('items-center q-gutter-sm'):
-                ui.button('Sign In', on_click=lambda: ui.navigate.to('/login')).props('flat color=white no-caps')
-                ui.button('Open App', on_click=lambda: ui.navigate.to('/app')).props('unelevated no-caps').classes('secondary-button')
+            with ui.row().classes('items-center'):
+                ui.button('Sign In', on_click=lambda: ui.navigate.to('/login')).props('flat color=white no-caps').classes('header-signin')
 
 
 def create_footer() -> None:
     with ui.footer().classes('bg-transparent q-py-lg'):
-        with ui.row().classes('app-shell floating-shell site-footer items-center justify-between'):
-            ui.label('ShelfWise Library System').classes('text-subtitle2 text-weight-bold')
-            ui.label('NiceGUI + SQLite scaffold for circulation, inventory, and account workflows.')
+        with ui.row().classes('app-shell floating-shell site-footer justify-between'):
+            with ui.column().classes('q-gutter-xs'):
+                ui.label('ShelfWise Library System').classes('text-subtitle2 text-weight-bold')
+            with ui.column().classes('site-footer-content q-gutter-sm'):
+                ui.label('Built to simplify discovery, circulation, and everyday library operations.')
+                with ui.row().classes('site-footer-links'):
+                    ui.link('Browse Catalog', '/app').classes('site-footer-link')
+                    ui.link('Collections', '/').classes('site-footer-link')
+                    ui.link('Member Access', '/login').classes('site-footer-link')
 
 
 def create_hero_section() -> None:
@@ -45,12 +50,12 @@ def create_hero_section() -> None:
 
 
 def create_book_card(book: Book) -> None:
-    with ui.card().classes('book-card full-height q-pa-md'):
-        with ui.column().classes('full-height no-wrap'):
+    with ui.card().classes('book-card full-height'):
+        with ui.element('div').classes('book-cover-shell w-full'):
+            with ui.element('div').classes('book-cover').style(f'background: {book.cover_color};'):
+                ui.label(book.title)
+        with ui.column().classes('book-card-body full-height no-wrap'):
             with ui.card_section().classes('q-pa-none'):
-                with ui.element('div').classes('book-cover').style(f'background: {book.cover_color};'):
-                    ui.label(book.title)
-            with ui.card_section().classes('q-px-none q-pb-none'):
                 ui.label(book.title).classes('text-h6 text-weight-bold')
                 ui.label(f'by {book.author}').classes('text-subtitle2 text-grey-7')
                 ui.label(book.summary).classes('text-body2 q-mt-sm')
@@ -68,15 +73,14 @@ def create_homepage() -> None:
         create_hero_section()
 
         with ui.column().classes('app-shell q-mt-xl q-gutter-lg'):
-            ui.label('Featured Shelf').classes('section-label')
-            with ui.row().classes('items-end justify-between'):
+            with ui.column().classes('featured-shelf-intro q-gutter-sm'):
+                ui.label('Featured Shelf').classes('section-label')
                 with ui.column().classes('q-gutter-xs'):
-                    ui.label('Mocked-up book cards for the landing page').classes('text-h4 text-weight-bold brand-heading')
+                    ui.label('Curated picks from the Featured Shelf').classes('text-h4 text-weight-bold brand-heading')
                     ui.label(
-                        'These cards are seeded from SQLite now, so the same data model can grow into browse, '
-                        'checkout, and admin CRUD pages.'
+                        'Explore standout titles selected to highlight the breadth of the collection and invite '
+                        'readers into their next great find.'
                     ).classes('text-body1 text-grey-7')
-                ui.button('View user area', on_click=lambda: ui.navigate.to('/app')).props('outline no-caps').classes('neutral-outline-button')
 
             with ui.element('div').classes('books-grid'):
                 for book in featured_books():

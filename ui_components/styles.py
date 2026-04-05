@@ -22,15 +22,34 @@ body {
     backdrop-filter: blur(10px);
     padding: 1rem 1.5rem;
 }
+.brand-link {
+    color: #f6f1e7;
+    text-decoration: none;
+}
 .nav-link {
     color: #f6f1e7;
-    font-weight: 600;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
     text-decoration: none;
 }
 .nav-links {
     display: flex;
     gap: 1.5rem;
     align-items: center;
+}
+.header-signin {
+    color: #f6f1e7 !important;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+.header-signin .q-focus-helper {
+    opacity: 0 !important;
 }
 .hero-panel {
     position: relative;
@@ -39,9 +58,9 @@ body {
         radial-gradient(circle at top right, rgba(240, 185, 74, 0.12), transparent 22%),
         url('https://www.csueastbay.edu/_files/images/home/redesign/hero-impact.webp'),
         linear-gradient(135deg, rgba(7, 13, 16, 0.98), rgba(16, 32, 41, 0.94));
-    background-position: center, top right, right center, center;
+    background-position: center, top right, calc(100% + 24px) center, center;
     background-repeat: no-repeat;
-    background-size: auto, auto, auto 100%, cover;
+    background-size: auto, auto, auto 104%, cover;
     border-radius: 34px;
     box-shadow: 0 32px 70px rgba(18, 30, 42, 0.24);
     overflow: hidden;
@@ -101,6 +120,61 @@ body {
     color: #f0b94a;
     font-size: 1.2rem;
 }
+.login-page-shell {
+    min-height: calc(100vh - 240px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 0 3rem;
+}
+.login-card {
+    width: min(460px, 100%);
+    padding: 2rem;
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255, 252, 246, 0.98), rgba(255, 248, 238, 0.95));
+    border: 1px solid rgba(50, 73, 72, 0.08);
+    box-shadow: 0 24px 54px rgba(18, 30, 42, 0.14);
+}
+.login-subtitle {
+    color: #5f6c76;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0.5rem 0 1rem;
+}
+.login-input {
+    width: 100%;
+    margin-top: 0.75rem;
+}
+.login-input .q-field__control {
+    border-radius: 16px !important;
+    background: rgba(255, 255, 255, 0.9);
+}
+.login-button,
+.login-button.q-btn {
+    width: 100%;
+    margin-top: 1rem;
+    background: rgba(16, 32, 41, 0.96) !important;
+    color: #f6f1e7 !important;
+    border: 1px solid rgba(240, 185, 74, 0.14);
+    border-radius: 16px !important;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    min-height: 52px;
+}
+.login-button .q-btn__content {
+    color: #f6f1e7 !important;
+}
+.login-button .q-focus-helper {
+    opacity: 0 !important;
+}
+.login-caption {
+    color: #6b7280;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
 .section-label {
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -113,17 +187,28 @@ body {
     background: rgba(255, 255, 255, 0.88);
     border: 1px solid rgba(50, 73, 72, 0.08);
     box-shadow: 0 14px 35px rgba(38, 51, 77, 0.08);
+    overflow: hidden;
+}
+.book-cover-shell {
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 .book-cover {
-    border-radius: 18px;
-    min-height: 220px;
-    padding: 1rem;
+    border-radius: 22px 22px 0 0;
+    min-height: 240px;
+    width: 100%;
+    margin: 0;
+    padding: 1.25rem;
     color: rgba(255, 248, 237, 0.95);
     display: flex;
     align-items: end;
     justify-content: start;
     font-size: 1.2rem;
     font-weight: 700;
+}
+.book-card-body {
+    padding: 1rem;
 }
 .stat-pill {
     border-radius: 999px;
@@ -136,12 +221,40 @@ body {
 .site-footer {
     color: rgba(255, 250, 242, 0.78);
     border-top: 1px solid rgba(240, 185, 74, 0.18);
+    align-items: center;
+    min-height: 104px;
+}
+.site-footer-content {
+    align-items: flex-end;
+    text-align: right;
+}
+.site-footer-links {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+.site-footer-link {
+    color: #f6f1e7;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.85rem;
+    font-weight: 700;
 }
 .books-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
     gap: 1.25rem;
     width: 100%;
+    justify-content: center;
+    justify-items: center;
+    margin: 0 auto;
+}
+.featured-shelf-intro {
+    width: min(100%, 1010px);
+    margin: 0 auto;
 }
 .surface-card {
     background: rgba(255, 255, 255, 0.96);
@@ -193,6 +306,13 @@ body {
     .hero-copy {
         padding: 2.25rem 2rem 2rem;
     }
+    .login-page-shell {
+        min-height: auto;
+        padding: 1.25rem 0 2rem;
+    }
+    .login-card {
+        padding: 1.5rem;
+    }
     .nav-links {
         display: none;
     }
@@ -200,9 +320,18 @@ body {
         padding: 0.9rem 1rem;
     }
     .site-footer {
+        min-height: auto;
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.5rem;
+        gap: 0.75rem;
+    }
+    .site-footer-content {
+        align-items: flex-start;
+        text-align: left;
+    }
+    .site-footer-links {
+        justify-content: flex-start;
+        gap: 0.9rem;
     }
 }
 """
