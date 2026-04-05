@@ -7,7 +7,7 @@ from models import Book, featured_books
 
 def create_header() -> None:
     with ui.header().classes('brand-header text-white q-py-md'):
-        with ui.row().classes('app-shell items-center justify-between no-wrap'):
+        with ui.row().classes('app-shell floating-shell items-center justify-between no-wrap'):
             with ui.row().classes('items-center q-gutter-sm'):
                 ui.icon('local_library', size='md')
                 ui.label('ShelfWise').classes('text-h5 text-weight-bold brand-heading')
@@ -22,23 +22,26 @@ def create_header() -> None:
 
 def create_footer() -> None:
     with ui.footer().classes('bg-transparent q-py-lg'):
-        with ui.row().classes('app-shell site-footer items-center justify-between q-pt-lg'):
+        with ui.row().classes('app-shell floating-shell site-footer items-center justify-between'):
             ui.label('ShelfWise Library System').classes('text-subtitle2 text-weight-bold')
             ui.label('NiceGUI + SQLite scaffold for circulation, inventory, and account workflows.')
 
 
 def create_hero_section() -> None:
     with ui.row().classes('app-shell hero-panel q-col-gutter-none items-stretch'):
-        with ui.column().classes('col-12 col-md-7 hero-copy justify-center'):
-            ui.label('Library workflows without the spreadsheet pain.').classes('hero-title')
+        with ui.column().classes('col-12 hero-copy justify-center'):
+            ui.label('ShelfWise').classes('hero-kicker')
+            with ui.column().classes('q-gutter-none'):
+                ui.label('Forge a Better Library').classes('hero-title')
+                ui.label('Workflow.').classes('hero-title hero-title-accent')
             ui.label(
-                'Track inventory, circulate books, manage member accounts, and leave room for admin tools '
-                'without turning a homework project into a mess.'
-            ).classes('hero-subtitle q-mt-md')
-            with ui.row().classes('q-gutter-sm q-mt-xl'):
-                ui.button('Explore the catalog', on_click=lambda: ui.navigate.to('/app')).props('unelevated no-caps').classes('secondary-button')
-                ui.button('Prototype login', on_click=lambda: ui.navigate.to('/login')).props('outline no-caps').classes('outline-button')
-        ui.element('div').classes('col-12 col-md-5 hero-media')
+                'Manage inventory, member accounts, circulation, and admin tasks in one place '
+                'without burying the project under spreadsheets and disconnected forms.'
+            ).classes('hero-subtitle q-mt-lg')
+            with ui.column().classes('hero-actions q-mt-xl'):
+                ui.link('Open the catalog', '/app').classes('hero-action-link')
+                ui.link('Prototype sign in', '/login').classes('hero-action-link')
+
 
 
 def create_book_card(book: Book) -> None:

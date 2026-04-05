@@ -14,6 +14,14 @@ body {
     background: transparent;
     box-shadow: none;
 }
+.floating-shell {
+    background: rgba(16, 32, 41, 0.94);
+    border: 1px solid rgba(240, 185, 74, 0.12);
+    border-radius: 24px;
+    box-shadow: 0 14px 32px rgba(10, 18, 24, 0.12);
+    backdrop-filter: blur(10px);
+    padding: 1rem 1.5rem;
+}
 .nav-link {
     color: #f6f1e7;
     font-weight: 600;
@@ -25,49 +33,73 @@ body {
     align-items: center;
 }
 .hero-panel {
-    background: linear-gradient(135deg, rgba(21, 67, 54, 0.96), rgba(37, 78, 112, 0.92));
-    border-radius: 28px;
-    box-shadow: 0 24px 60px rgba(26, 45, 64, 0.18);
+    position: relative;
+    background:
+        linear-gradient(90deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.96) 38%, rgba(0, 0, 0, 0.84) 52%, rgba(0, 0, 0, 0.58) 62%, rgba(0, 0, 0, 0.26) 72%, rgba(0, 0, 0, 0.08) 80%, rgba(0, 0, 0, 0) 88%),
+        radial-gradient(circle at top right, rgba(240, 185, 74, 0.12), transparent 22%),
+        url('https://www.csueastbay.edu/_files/images/home/redesign/hero-impact.webp'),
+        linear-gradient(135deg, rgba(7, 13, 16, 0.98), rgba(16, 32, 41, 0.94));
+    background-position: center, top right, right center, center;
+    background-repeat: no-repeat;
+    background-size: auto, auto, auto 100%, cover;
+    border-radius: 34px;
+    box-shadow: 0 32px 70px rgba(18, 30, 42, 0.24);
     overflow: hidden;
-    min-height: 420px;
+    min-height: 480px;
 }
 .hero-copy {
-    padding: 2.75rem 3rem;
+    position: relative;
+    z-index: 2;
+    padding: 4.25rem 3.5rem 4rem;
+    max-width: 46rem;
+}
+.hero-kicker {
+    font-family: "Segoe UI", sans-serif;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.78rem;
+    font-weight: 700;
 }
 .hero-title {
-    font-size: clamp(2.5rem, 4vw, 4.4rem);
-    font-weight: 800;
-    line-height: 1.05;
-    color: #fff8ed;
+    font-size: clamp(3rem, 5vw, 5.4rem);
+    font-weight: 700;
+    line-height: 0.95;
+    color: #fffaf2;
+}
+.hero-title-accent {
+    color: #f0b94a;
 }
 .hero-subtitle {
-    color: rgba(255, 248, 237, 0.82);
-    font-size: 1.05rem;
-    line-height: 1.7;
-    max-width: 38rem;
+    color: rgba(255, 250, 242, 0.8);
+    font-size: 1.06rem;
+    line-height: 1.8;
+    max-width: 30rem;
+    font-family: "Segoe UI", sans-serif;
 }
-.hero-media {
-    min-height: 420px;
-    background:
-        linear-gradient(145deg, rgba(255, 248, 237, 0.15), rgba(255, 248, 237, 0.03)),
-        repeating-linear-gradient(
-            135deg,
-            rgba(255, 255, 255, 0.05),
-            rgba(255, 255, 255, 0.05) 18px,
-            transparent 18px,
-            transparent 36px
-        ),
-        url('https://www.csueastbay.edu/_files/images/home/redesign/hero-impact.webp');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 248, 237, 0.72);
+.hero-actions {
+    gap: 0.9rem;
+}
+.hero-action-link {
+    width: fit-content;
+    color: #fffaf2;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-family: "Segoe UI", sans-serif;
+    font-weight: 700;
     font-size: 1rem;
-    text-align: center;
-    padding: 0;
+    position: relative;
+    padding-left: 2rem;
+}
+.hero-action-link::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-52%);
+    color: #f0b94a;
+    font-size: 1.2rem;
 }
 .section-label {
     letter-spacing: 0.18em;
@@ -102,8 +134,8 @@ body {
     font-weight: 600;
 }
 .site-footer {
-    color: #52606d;
-    border-top: 1px solid rgba(50, 73, 72, 0.1);
+    color: rgba(255, 250, 242, 0.78);
+    border-top: 1px solid rgba(240, 185, 74, 0.18);
 }
 .books-grid {
     display: grid;
@@ -148,16 +180,24 @@ body {
 }
 @media (max-width: 700px) {
     .hero-copy {
-        padding: 2rem;
+        padding: 2.25rem 2rem 1.25rem;
     }
     .hero-panel {
         min-height: auto;
+        background-position: center, top right, center bottom, center;
+        background-size: auto, auto, 100% auto, cover;
     }
-    .hero-media {
-        min-height: 260px;
+    .hero-title {
+        font-size: clamp(2.6rem, 12vw, 3.8rem);
+    }
+    .hero-copy {
+        padding: 2.25rem 2rem 2rem;
     }
     .nav-links {
         display: none;
+    }
+    .floating-shell {
+        padding: 0.9rem 1rem;
     }
     .site-footer {
         flex-direction: column;
